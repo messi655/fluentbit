@@ -10,7 +10,11 @@ apt-get update -y
 
 apt-get install td-agent-bit -y
 
-echo "ELASTICSEARCH_HOST="127.0.0.1"" >> /etc/environment
+cat /etc/environment|grep ELASTICSEARCH_HOST
+return_code=$(echo $?)
+if [ $return_code == 1 ];then
+        echo "ELASTICSEARCH_HOST="es.internal.cloudhms.io"" >> /etc/environment
+fi
 source /etc/environment
 
 rm -f /etc/td-agent-bit/td-agent-bit.conf
