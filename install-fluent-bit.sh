@@ -10,7 +10,8 @@ apt-get update -y
 
 apt-get install td-agent-bit -y
 
-export ELASTICSEARCH_HOST=127.0.0.1
+echo "ELASTICSEARCH_HOST="127.0.0.1"" >> /etc/environment
+source /etc/environment
 
 rm -f /etc/td-agent-bit/td-agent-bit.conf
 rm -f /etc/td-agent-bit/parsers.conf
@@ -29,6 +30,11 @@ wget https://raw.githubusercontent.com/messi655/fluentbit/master/config/input-ap
 wget https://raw.githubusercontent.com/messi655/fluentbit/master/config/filter-php-fpm.conf
 wget https://raw.githubusercontent.com/messi655/fluentbit/master/config/filter-apache-error.conf
 wget https://raw.githubusercontent.com/messi655/fluentbit/master/config/filter-apache-access.conf
+wget https://raw.githubusercontent.com/messi655/fluentbit/master/config/plugins.conf
+
+sed -i 's/elasticsearch_host/'"$ELASTICSEARCH_HOST"'/g' output-elasticsearch-apache-access.conf 
+sed -i 's/elasticsearch_host/'"$ELASTICSEARCH_HOST"'/g' output-elasticsearch-php-fpm.conf 
+sed -i 's/elasticsearch_host/'"$ELASTICSEARCH_HOST"'/g' output-elasticsearch-apache-error.conf 
 
 systemctl enable td-agent-bit
 
