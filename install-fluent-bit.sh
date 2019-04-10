@@ -17,7 +17,7 @@ rm -f /etc/td-agent-bit/parsers.conf
 rm -f /etc/td-agent-bit/plugins.conf
 
 cd /etc/td-agent-bit/
-touch plugins.conf
+echo "" > plugins.conf
 wget https://raw.githubusercontent.com/messi655/fluentbit/master/config/td-agent-bit.conf
 wget https://raw.githubusercontent.com/messi655/fluentbit/master/config/parsers.conf
 wget https://raw.githubusercontent.com/messi655/fluentbit/master/config/output-elasticsearch-php-fpm.conf
