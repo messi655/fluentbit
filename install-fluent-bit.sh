@@ -39,4 +39,3 @@ sed -i 's/elasticsearch_host/'"$ELASTICSEARCH_HOST"'/g' output-elasticsearch-apa
 systemctl enable td-agent-bit
 
 systemctl start td-agent-bit
-
